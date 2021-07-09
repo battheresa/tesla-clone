@@ -7,12 +7,17 @@ import Footer from '../components/Footer';
 import styles from '../styles/Home.module.css';
 
 import { t } from '../resources/Translations';
+import { getImage } from '../utilities/firebase/storage';
 import { useWindowDimensions } from '../utilities/customHooks';
 
 function Home() {
     const router = useRouter();
     const { width, height } = useWindowDimensions();
     const [ slide, setSlide ] = useState(0);
+
+    useEffect(() => {
+        getImage('model-3', 'cover-desktop', 'jpeg');   // working
+    }, []);
 
     // update current slide
     const handleOnScroll = (offset) => {
@@ -42,6 +47,7 @@ function Home() {
             <main className={styles.sections}>
                 <section style={{ height: `${height}px` }} color='primary'>
                     <h1>Model S</h1>
+
                 </section>
                 <section style={{ height: `${height}px` }} color='secondary'>
                     <h1>Model X</h1>
