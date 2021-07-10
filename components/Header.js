@@ -1,16 +1,28 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
+
+import LogoBlack from '../public/logo-black.png';
+import LogoWhite from '../public/logo-white.png';
 
 import Sidebar from './Sidebar';
 
 import { t } from '../resources/Translations';
-import Logo from '../public/logo.png';
-
+import { deviceBreakpoint } from '../utilities/config';
+import { useWindowDimensions } from '../utilities/customHooks';
 import styles from '../styles/components/Header.module.css';
 
-function Header() {
+function Header({ mode, curSlide, bgColor }) {
+    const router = useRouter();
+    const { width, height } = useWindowDimensions();
+    
+    const [ hideMenu, setHideMenu ] = useState(false);
     const [ openSidebar, setOpenSidebar ] = useState(false);
     const [ backdropStyle, setBackdropStyle ] = useState({ width: 0, height: 0, left: 0, opacity: 0 });
+
+    useEffect(() => {
+        setHideMenu(mode === 'other' && curSlide !== 0);
+    }, [mode, curSlide, width]);
 
     // on mouse enter button
     const handleOnMouseEnter = (event) => {
@@ -32,18 +44,18 @@ function Header() {
         <div>
             <header className={styles.container} onMouseLeave={(e) => setBackdropStyle({ ...backdropStyle, opacity: 0 })}>
                 <div className={styles.backdrop} style={backdropStyle} />
-                <div className={styles.logo}>
-                    <Image src={Logo} alt='tesla-logo' />
+                <div className={styles.logo} onClick={() => router.push('/', '/', { locale: router.locale })}>
+                    <Image src={bgColor === 'white' ? LogoBlack : LogoWhite} alt='tesla-logo' />
                 </div>
-                <nav>
+                {!hideMenu && width > deviceBreakpoint && <nav>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model 3</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model S</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model X</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model Y</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Solar Roof</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Solar Panels</button>
-                </nav>
-                <button onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => setOpenSidebar(true)}>{t('button.menu')}</button>
+                </nav>}
+                {!hideMenu && <button onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => setOpenSidebar(true)}>{t('button.menu')}</button>}
             </header>
 
             <Sidebar open={openSidebar} setOpen={setOpenSidebar} />

@@ -1,0 +1,1 @@
+export const deviceBreakpoint = 940;

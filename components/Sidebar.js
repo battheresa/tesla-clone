@@ -10,7 +10,6 @@ import styles from '../styles/components/Sidebar.module.css';
 
 function Sidebar({ open, setOpen }) {
     const router = useRouter();
-    const { pathname } = router;
 
     const locale = currentLocale();
     const localeOptions = allLocales();
@@ -28,7 +27,7 @@ function Sidebar({ open, setOpen }) {
     // change language
     const changeLocale = (code) => {
         handleOnClose();
-        router.push(pathname, pathname, { locale: code });
+        router.push(router.pathname, router.pathname, { locale: code });
     };
 
     return (

@@ -42,12 +42,11 @@ function Home() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <Header />
+            <Header mode='main' curSlide={slide}  bgColor='white' />
 
             <main className={styles.sections}>
                 <section style={{ height: `${height}px` }} color='primary'>
                     <h1>Model S</h1>
-
                 </section>
                 <section style={{ height: `${height}px` }} color='secondary'>
                     <h1>Model X</h1>
