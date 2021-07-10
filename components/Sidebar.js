@@ -1,24 +1,47 @@
-import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { ChevronLeft, X, Globe } from 'react-feather';
 
-import { t, currentLocale } from '../resources/Translations';
-import styles from '../styles/Sidebar.module.css';
+import LanguageButton from './subcomponents/LanguageButton';
+
+import { t, currentLocale, allLocales } from '../resources/Translations';
+import { useWindowDimensions } from '../utilities/customHooks';
+import styles from '../styles/components/Sidebar.module.css';
 
 function Sidebar({ open, setOpen }) {
+    const router = useRouter();
+    const { pathname } = router;
+
     const locale = currentLocale();
+    const localeOptions = allLocales();
+    const { width, height } = useWindowDimensions();
+
     const iconSize = 20;
-    const [ menu, setMenu ] = useState(1);
+    const [ menu, setMenu ] = useState(0);
+
+    // handle on close sidebar
+    const handleOnClose = () => {
+        setOpen(false);
+        setMenu(0);
+    };
+
+    // change language
+    const changeLocale = (code) => {
+        handleOnClose();
+        router.push(pathname, pathname, { locale: code });
+    };
 
     return (
         <div>
-            <div className={styles.container} style={{ right: open ? '0' : '-280px', opacity: open ? '1' : '0' }}>
+            <div className={styles.container} style={{ right: open ? '0' : '-310px', opacity: open ? '1' : '0', height: `${height}px` }}>
                 
                 {/* controller */}
                 <div className={styles.controller} layout={menu === 1 ? 'between': ''}>
                     {menu === 1 && <button onClick={() => setMenu(0)}>
-                        <ChevronLeft width={iconSize - 2} style={{ marginRight: '5px' }} />Back
+                        <ChevronLeft width={iconSize - 2} style={{ marginRight: '5px' }} />
+                        {t('button.back')}
                     </button>}
-                    <button onClick={() => setOpen(false)}><X width={iconSize} /></button>
+                    <button onClick={() => handleOnClose()}><X width={iconSize} /></button>
                 </div>
 
                 {/* navigation */}
@@ -41,35 +64,30 @@ function Sidebar({ open, setOpen }) {
                 {/* language */}
                 {menu === 1 && <div className={styles.language}>
                     <h3>North America</h3>
-                    <div onClick={() => setMenu(1)}>
-                        <p>Country</p>
-                        <span>
-                            <a style={{ gridColumnStart: '2', width: 'fit-content' }}>Language 1</a>
-                            <a style={{ gridColumnStart: '2', width: 'fit-content' }}>Language 2</a>
-                        </span>
-                    </div>
-                    <div onClick={() => setMenu(1)}>
-                        <p>Country</p>
-                        <span>
-                            <a style={{ gridColumnStart: '2', width: 'fit-content' }}>Language 1</a>
-                            <a style={{ gridColumnStart: '2', width: 'fit-content' }}>Language 2</a>
-                        </span>
-                    </div>
+                    <LanguageButton country='Canada' languages={[ localeOptions.enus, localeOptions.fr ]} changeRoute={changeLocale} />
+                    <LanguageButton country='México' languages={[ localeOptions.es ]} changeRoute={changeLocale} />
+                    <LanguageButton country='Puerto Rico' languages={[ localeOptions.enus, localeOptions.es ]} changeRoute={changeLocale} />
+                    <LanguageButton country='United States' languages={[ localeOptions.enus ]} changeRoute={changeLocale} />
 
                     <h3>Europe</h3>
-                    <div onClick={() => setMenu(1)}>
-                        <p>Country</p>
-                        <span>
-                            <a style={{ gridColumnStart: '2', width: 'fit-content' }}>Language 1</a>
-                            <a style={{ gridColumnStart: '2', width: 'fit-content' }}>Language 2</a>
-                        </span>
-                    </div>
+                    <LanguageButton country='Belgium' languages={[ localeOptions.fr ]} changeRoute={changeLocale} />
+                    <LanguageButton country='España' languages={[ localeOptions.es ]} changeRoute={changeLocale} />
+                    <LanguageButton country='France' languages={[ localeOptions.fr ]} changeRoute={changeLocale} />
+                    <LanguageButton country='Ireland' languages={[ localeOptions.enuk ]} changeRoute={changeLocale} />
+                    <LanguageButton country='Switzerland' languages={[ localeOptions.fr ]} changeRoute={changeLocale} />
+                    <LanguageButton country='United Kingdom' languages={[ localeOptions.enuk ]} changeRoute={changeLocale} />
+
+                    <h3>Asia/Pacific</h3>
+                    <LanguageButton country='Australia' languages={[ localeOptions.enus ]} changeRoute={changeLocale} />
+                    <LanguageButton country='New Zealand' languages={[ localeOptions.enus ]} changeRoute={changeLocale} />
+                    <LanguageButton country='Singapore' languages={[ localeOptions.enus ]} changeRoute={changeLocale} />
+                    <LanguageButton country='Hong Kong' languages={[ localeOptions.enuk ]} changeRoute={changeLocale} />
+                    <LanguageButton country='Macau' languages={[ localeOptions.enuk ]} changeRoute={changeLocale} />
                 </div>}
             </div>
 
-
             {/* screen cover */}
-            <div onClick={() => setOpen(false)} className={styles.screenCover} style={{ visibility: open ? 'visible' : 'hidden', opacity: open ? '1' : '0' }} />
+            <div onClick={() => handleOnClose()} className={styles.screenCover} style={{ visibility: open ? 'visible' : 'hidden', opacity: open ? '1' : '0' }} />
         </div>
     );
 }

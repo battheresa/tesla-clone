@@ -1,18 +1,19 @@
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
 
-const languages = {
-    en: 'English',
-    es: 'Español',
-    fr: 'Français',
-};
+const languageCode = {
+    enus: { code: 'en-us', language: 'English' },
+    enuk: { code: 'es-uk', language: 'English' },
+    es: { code: 'es', language: 'Español' },
+    fr: { code: 'fr', language: 'Français' },
+}
 
-const countries = {
-    uk: 'United Kingdom',
-    us: 'United States',
-    es: 'España',
-    fr: 'France',
-};
+const languageCountry = {
+    enus: { code: 'en-us', language: 'English', country: 'United States' },
+    enuk: { code: 'en-uk', language: 'English', country: 'United Kingdom' },
+    es: { code: 'es', language: 'Español', country: 'España' },
+    fr: { code: 'fr', language: 'Français', country: 'France' },
+}
 
 export const t = (id) => {
     const { formatMessage } = useIntl();
@@ -21,7 +22,10 @@ export const t = (id) => {
 
 export const currentLocale = () => {
     const { locale } = useRouter();
-    const language = languages[locale.split('-')[0]];
-    const country = countries[locale.includes('-') ? locale.split('-')[1] : locale];
-    return { code: locale, language: language, country: country };
+    const id = locale.replace('-', '');
+    return languageCountry[id];
 };
+
+export const allLocales = () => {
+    return languageCode;
+}

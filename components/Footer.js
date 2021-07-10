@@ -1,5 +1,5 @@
 import { t } from '../resources/Translations';
-import styles from '../styles/Footer.module.css';
+import styles from '../styles/components/Footer.module.css';
 
 function Footer({ open }) {
     return (

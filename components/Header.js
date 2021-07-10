@@ -4,14 +4,13 @@ import { useState, useEffect, useRef } from 'react';
 import Sidebar from './Sidebar';
 
 import { t } from '../resources/Translations';
-import Logo from '../resources/images/logo.png';
+import Logo from '../public/logo.png';
 
-import styles from '../styles/Header.module.css';
+import styles from '../styles/components/Header.module.css';
 
 function Header() {
     const [ openSidebar, setOpenSidebar ] = useState(false);
     const [ backdropStyle, setBackdropStyle ] = useState({ width: 0, height: 0, left: 0, opacity: 0 });
-
 
     // on mouse enter button
     const handleOnMouseEnter = (event) => {
@@ -44,7 +43,7 @@ function Header() {
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Solar Roof</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Solar Panels</button>
                 </nav>
-                <button onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => setOpenSidebar(true)}>Menu</button>
+                <button onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => setOpenSidebar(true)}>{t('button.menu')}</button>
             </header>
 
             <Sidebar open={openSidebar} setOpen={setOpenSidebar} />
