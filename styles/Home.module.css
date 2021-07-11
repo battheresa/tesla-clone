@@ -36,7 +36,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    height: calc(62vh) !important;
+    height: 62vh !important;
 }
 
 .cybertruckText > p {
@@ -59,7 +59,6 @@
     align-self: center !important;
     margin-top: 48px;
     border-radius: 0;
-    /* border-width: 0.3em !important; */
     border-width: 3px !important;
 }
 
@@ -106,4 +105,53 @@
     position: absolute;
     bottom: 25px;
     transition: 0.5s;   
+}
+
+@media screen and (max-width: 470px) {
+    .content {
+        padding-top: 115px;
+    }
+    
+    .content > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+
+        width: 100vw;
+        height: 52vh;
+    }
+    
+    .content > div > button {
+        width: 85%;
+        align-self: center;
+    }
+
+    .content > span {
+        position: relative;
+        margin-top: 35px;
+    }
+
+    .cybertruck {
+        margin-top: 10px !important;
+        width: 320px;
+        height: 100px;
+    }
+
+    .cybertruckText {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        height: 48vh !important;
+    }
+
+    .cybertruckText > p {
+        width: 85%;
+        text-align: center;
+    }
+
+    .cybertruckText > button {
+        margin-top: 32px;
+    }
 }

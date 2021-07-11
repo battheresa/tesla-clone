@@ -67,6 +67,10 @@ h6 {
 }
 p { font-weight: 400; }
 
+@media screen and (max-width: 940px) {
+    h1 { font-size: 1.6em; }
+}
+
 /* ---------- input ---------- */
 
 input, input::placeholder {
