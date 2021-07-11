@@ -2,7 +2,8 @@ import flatten from 'flat';
 
 // components
 const header = {
-    test: 'test',
+    menu1: 'Cybertruck',
+    menu2: 'Powerwall',
 };
 
 const footer = {
@@ -16,6 +17,10 @@ const button = {
 };
 
 const menu = {
+    shopNow: 'Ordenar ahora',
+    orderNow: 'Ordenar ahora',
+    learnMore: 'Más Informacíon',
+    customOrder: 'Orden Personalizada',
     existingInventory: 'Vehículos Disponibles',
     usedInventory: 'Vehículos Usados',
 };
@@ -30,8 +35,11 @@ const components = {
 // pages
 const home = {
     ...components,
-    hello: 'Bonjour le monde!',
-    welcome: 'Bienvenue sur votre page internationalisée!',
+    description: 'Ordene en línea para',
+    link: 'entrega sin contacto',
+    solarPanels: '',
+    solarRoof: '',
+    powerwall: 'Energía para todo',
 };
 
 const other = {

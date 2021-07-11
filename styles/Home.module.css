@@ -3,28 +3,65 @@
     overflow-x: hidden;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+    
+    position: relative;
+    z-index: 1;
+}
+
+.slides {
     position: relative;
 }
 
-.sections > section {
+.slides > section {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+
     width: 100vw;
     scroll-snap-align: start;
     scroll-snap-stop: normal;
 }
 
-.sections > section[color=primary] {
-    background-color: var(--white);
+.content {
+    width: 100vw;
+    padding-top: 135px;
+
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    transition: 0.02s;
 }
 
-.sections > section[color=secondary] {
-    background-color: var(--black);
+.content > h1 {
+    margin: 0;
+    opacity: 0.9;
 }
 
-.sections > section[color=tertiary] {
-    background-color: var(--lightBlue);
+.content > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 63vh;
 }
 
-.sections > section[color=secondary] > h1,
-.sections > section[color=tertiary] > h1 {
-    color: var(--white);
+.content > div[layout=single] {
+    grid-template-columns: 1fr;
+}
+
+.content > div > button {
+    font-size: 0.78em;
+    align-self: flex-end;
+    min-width: 260px;
+    transition: 0.5s;
+}
+
+.content > span {
+    position: absolute;
+    bottom: 25px;
+    transition: 0.5s;   
 }

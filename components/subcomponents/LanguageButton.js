@@ -5,8 +5,8 @@ function LanguageButton({ country, languages, changeRoute }) {
         <div className={styles.container}>
             <p>{country}</p>
             <span>
-                {languages.map(item => (
-                    <a onClick={() => changeRoute(item.code)}>{item.language}</a>
+                {languages.map((item, i) => (
+                    <a key={i} onClick={() => changeRoute(item.code)}>{item.language}</a>
                 ))}
             </span>
         </div>

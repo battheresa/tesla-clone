@@ -2,7 +2,8 @@ import flatten from 'flat';
 
 // components
 const header = {
-    test: 'test',
+    menu1: 'Solar Roof',
+    menu2: 'Solar Panels',
 };
 
 const footer = {
@@ -16,6 +17,10 @@ const button = {
 };
 
 const menu = {
+    shopNow: 'Shop Now',
+    orderNow: 'Order Now',
+    learnMore: 'Learn More',
+    customOrder: 'Custom Order',
     existingInventory: 'Existing Inventory',
     usedInventory: 'Used Inventory',
 };
@@ -30,8 +35,11 @@ const components = {
 // pages
 const home = {
     ...components,
-    hello: 'Hello World!',
-    welcome: 'Welcome to your internationalized page!',
+    description: 'Order online for',
+    link: 'Touchless Delivery',
+    solarPanels: 'Lowest Cost Solar Panels in America',
+    solarRoof: 'Produce Clean Energy From Your Roof',
+    powerwall: 'Power Everything',
 };
 
 const other = {

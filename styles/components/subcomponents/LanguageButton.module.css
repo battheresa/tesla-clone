@@ -34,6 +34,7 @@
 }
 
 .container > span > a {
+    font-size: 0.9em;
     font-weight: 500;
     margin-right: 10px;
 }

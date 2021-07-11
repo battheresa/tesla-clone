@@ -7,12 +7,12 @@ import LogoWhite from '../public/logo-white.png';
 
 import Sidebar from './Sidebar';
 
-import { t } from '../resources/Translations';
+import { t } from '../resources/Translations';  // cause error
 import { deviceBreakpoint } from '../utilities/config';
 import { useWindowDimensions } from '../utilities/customHooks';
 import styles from '../styles/components/Header.module.css';
 
-function Header({ mode, curSlide, bgColor }) {
+function Header({ mode, curSlide, bgColor, setScrolling }) {
     const router = useRouter();
     const { width, height } = useWindowDimensions();
     
@@ -20,9 +20,16 @@ function Header({ mode, curSlide, bgColor }) {
     const [ openSidebar, setOpenSidebar ] = useState(false);
     const [ backdropStyle, setBackdropStyle ] = useState({ width: 0, height: 0, left: 0, opacity: 0 });
 
+    // get hide menu
     useEffect(() => {
         setHideMenu(mode === 'other' && curSlide !== 0);
     }, [mode, curSlide, width]);
+
+    // on open sidebar 
+    const handleOpenSidebar = (value) => {
+        setOpenSidebar(value);
+        setScrolling(!value);
+    }
 
     // on mouse enter button
     const handleOnMouseEnter = (event) => {
@@ -52,13 +59,13 @@ function Header({ mode, curSlide, bgColor }) {
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model S</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model X</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model Y</button>
-                    <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Solar Roof</button>
-                    <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Solar Panels</button>
+                    <button onMouseEnter={(e) => handleOnMouseEnter(e)}>{t('header.menu1')}</button>
+                    <button onMouseEnter={(e) => handleOnMouseEnter(e)}>{t('header.menu2')}</button>
                 </nav>}
-                {!hideMenu && <button onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => setOpenSidebar(true)}>{t('button.menu')}</button>}
+                {!hideMenu && <button onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => handleOpenSidebar(true)}>{t('button.menu')}</button>}
             </header>
 
-            <Sidebar open={openSidebar} setOpen={setOpenSidebar} />
+            <Sidebar open={openSidebar} setOpen={handleOpenSidebar} />
         </div>
     );
 }

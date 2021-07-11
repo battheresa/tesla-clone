@@ -6,4 +6,3 @@ export const getImage = async (folder, filename, extension) => {
     const url = await file.getDownloadURL();
     return url;
 };
-
