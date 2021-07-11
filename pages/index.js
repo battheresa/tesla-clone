@@ -40,8 +40,6 @@ function Home() {
         setCybertruckLogo(`url(${logo})`);
     }, []);
 
-    console.log(cybertruckLogo);
-
     // arrow animation
     useEffect(() => {
         const interval = setInterval(() => {
@@ -112,7 +110,7 @@ function Home() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <Header mode='main' curSlide={0} bgColor='white' setScrolling={setContentScroll} />
+            <Header mode='main' curSlide={0} bgColor={content[slide].tag === 'powerwall' ? 'black' : 'white'} setScrolling={setContentScroll} />
 
             <main className={styles.slides}>
                 {content.map((item, i) => (
@@ -121,15 +119,14 @@ function Home() {
 
                 <div className={styles.content} style={{ height: `${height}px`, opacity: contentOpacity }}>
                     {content[slide].tag !== 'cybertruck' 
-                        ? <h1>{content[slide].title}</h1>
+                        ? <h1 style={{ color: content[slide].tag === 'powerwall' ? 'var(--white)' : 'var(--black)' }}>{content[slide].title}</h1>
                         : <h1 className={styles.cybertruck} style={{ backgroundImage: cybertruckLogo }} />
                     }
                     
                     {content[slide].tag === 'auto' && <h5>{t('description')} <a>{t('link')}</a></h5>}
                     {content[slide].tag === 'solar-panels' && <h5>{t('solarPanels')}</h5>}
                     {content[slide].tag === 'solar-roof' && <h5>{t('solarRoof')}</h5>}
-                    {content[slide].tag === 'powerwall' && <h5>{t('powerwall')}</h5>}
-                    {content[slide].tag === 'shop' && <h5></h5>}
+                    {(content[slide].tag === 'powerwall' || content[slide].tag === 'shop') && <h5></h5>}
                     
                     {content[slide].tag === 'auto' && <div>
                         <button color='secondary' variant='contained' style={buttonStyle}>{t('menu.customOrder')}</button>

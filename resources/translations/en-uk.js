@@ -40,7 +40,7 @@ const home = {
     solarPanels: '',
     solarRoof: '',
     cybertruck: 'Better utility than a truck with more performance than a sports car',
-    powerwall: 'Power Everything',
+    powerwall: '',
 };
 
 const other = {

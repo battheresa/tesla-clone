@@ -25,6 +25,10 @@
     background-color: var(--transparent);
 }
 
+.container > nav[color=reverse] > button, .container > button[color=reverse] {
+    color: var(--white);
+}
+
 .logo {
     cursor: pointer;
     width: 120px;
@@ -33,7 +37,7 @@
 
 .backdrop {
     border-radius: 12px;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.08);
     -webkit-backdrop-filter: blur(16px);
 
     position: absolute;
@@ -44,13 +48,21 @@
     z-index: 10;
 }
 
+.backdrop[color=reverse] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 @media screen and (max-width: 940px) {
     .container {
         padding: 0 16px;
     }
 
     .container > button {
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: rgba(0, 0, 0, 0.08);
         -webkit-backdrop-filter: blur(16px);
+    }
+
+    .container > button[color=reverse] {
+        background-color: rgba(255, 255, 255, 0.18);
     }
 }

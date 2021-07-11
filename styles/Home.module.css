@@ -98,6 +98,8 @@
     align-self: flex-end;
     min-width: 260px;
     transition: 0.5s;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
 .content > span {

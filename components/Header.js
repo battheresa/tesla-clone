@@ -50,11 +50,11 @@ function Header({ mode, curSlide, bgColor, setScrolling }) {
     return (
         <div>
             <header className={styles.container} onMouseLeave={(e) => setBackdropStyle({ ...backdropStyle, opacity: 0 })}>
-                <div className={styles.backdrop} style={backdropStyle} />
+                <div className={styles.backdrop} style={backdropStyle} color={bgColor === 'white' ? 'original' : 'reverse'} />
                 <div className={styles.logo} onClick={() => router.push('/', '/', { locale: router.locale })}>
                     <Image src={bgColor === 'white' ? LogoBlack : LogoWhite} alt='tesla-logo' />
                 </div>
-                {!hideMenu && width > deviceBreakpoint && <nav>
+                {!hideMenu && width > deviceBreakpoint && <nav color={bgColor === 'white' ? 'original' : 'reverse'}>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model 3</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model S</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model X</button>
@@ -62,7 +62,7 @@ function Header({ mode, curSlide, bgColor, setScrolling }) {
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>{t('header.menu1')}</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>{t('header.menu2')}</button>
                 </nav>}
-                {!hideMenu && <button onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => handleOpenSidebar(true)}>{t('button.menu')}</button>}
+                {!hideMenu && <button color={bgColor === 'white' ? 'original' : 'reverse'} onMouseEnter={(e) => handleOnMouseEnter(e)} onClick={() => handleOpenSidebar(true)}>{t('button.menu')}</button>}
             </header>
 
             <Sidebar open={openSidebar} setOpen={handleOpenSidebar} />
