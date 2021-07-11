@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 const languageCode = {
     enus: { code: 'en-us', language: 'English' },
-    enuk: { code: 'es-uk', language: 'English' },
+    enuk: { code: 'en-uk', language: 'English' },
     es: { code: 'es', language: 'Español' },
     fr: { code: 'fr', language: 'Français' },
 }

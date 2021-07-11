@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
@@ -15,6 +16,7 @@ import { ChevronDown } from 'react-feather';
 
 function Home() {
     const router = useRouter();
+    const [ cybertruckLogo, setCybertruckLogo ] = useState('');
     const { width, height } = useWindowDimensions();
 
     const [ slide, setSlide ] = useState(0);
@@ -32,6 +34,13 @@ function Home() {
         { tag: router.locale === 'en-us' ? 'solarRoof' : 'Powerwall', title: router.locale === 'en-us' ? 'Solar Roof' : 'Powerwall', bgImage: '' },
         { tag: 'shop', title: 'Accessories', bgImage: '' },
     ]);
+
+    useEffect(async () => {
+        const logo = await getImage('cybertruck', 'text', 'png');
+        setCybertruckLogo(`url(${logo})`);
+    }, []);
+
+    console.log(cybertruckLogo);
 
     // arrow animation
     useEffect(() => {
@@ -55,7 +64,7 @@ function Home() {
     // button animation
     useEffect(() => {
         const interval = setInterval(() => {
-            setButtonStyle({ marginLeft: '12px', marginRight: '12px', opacity: '0.85' });
+            setButtonStyle({ marginLeft: '12px', marginRight: '12px', opacity: '0.75' });
         }, 500);
 
         return () => clearInterval(interval);
@@ -66,7 +75,7 @@ function Home() {
         const imgSize = width && width < (deviceBreakpoint - 180) ? 'mobile' : 'desktop';
         let nContent = [ ...content ];
 
-        nContent[4].tag = router.locale === 'en-us' ? 'solar-panel' : 'cybertruck';
+        nContent[4].tag = router.locale === 'en-us' ? 'solar-panels' : 'cybertruck';
         nContent[4].title = router.locale === 'en-us' ? 'Solar Panels' : 'Cybertruck';
         
         nContent[5].tag = router.locale === 'en-us' ? 'solar-roof' : 'powerwall';
@@ -111,7 +120,10 @@ function Home() {
                 ))}
 
                 <div className={styles.content} style={{ height: `${height}px`, opacity: contentOpacity }}>
-                    <h1>{content[slide].title}</h1>
+                    {content[slide].tag !== 'cybertruck' 
+                        ? <h1>{content[slide].title}</h1>
+                        : <h1 className={styles.cybertruck} style={{ backgroundImage: cybertruckLogo }} />
+                    }
                     
                     {content[slide].tag === 'auto' && <h5>{t('description')} <a>{t('link')}</a></h5>}
                     {content[slide].tag === 'solar-panels' && <h5>{t('solarPanels')}</h5>}
@@ -123,7 +135,15 @@ function Home() {
                         <button color='secondary' variant='contained' style={buttonStyle}>{t('menu.customOrder')}</button>
                         <button color='primary' variant='contained' style={buttonStyle}>{t('menu.existingInventory')}</button>
                     </div>}
+                    {content[slide].tag === 'cybertruck' && <div className={styles.cybertruckText}>
+                        <p>{t('cybertruck')}</p>
+                        <button color='primary' variant='outlined'>{t('menu.orderNow')}</button>
+                    </div>}
                     {content[slide].tag.includes('solar') && <div>
+                        <button color='secondary' variant='contained'>{t('menu.orderNow')}</button>
+                        <button color='primary' variant='contained'>{t('menu.learnMore')}</button>
+                    </div>}
+                    {content[slide].tag === 'powerwall' && <div>
                         <button color='secondary' variant='contained'>{t('menu.orderNow')}</button>
                         <button color='primary' variant='contained'>{t('menu.learnMore')}</button>
                     </div>}

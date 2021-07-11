@@ -39,6 +39,7 @@ const home = {
     link: 'livraison sans contact',
     solarPanels: '',
     solarRoof: '',
+    cybertruck: 'Better utility than a truck with more performance than a sports car',
     powerwall: 'Alimentez tout',
 };
 
