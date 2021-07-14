@@ -1,0 +1,386 @@
+.container {
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    
+    position: relative;
+    z-index: 1;
+}
+
+.slides {
+    position: relative;
+}
+
+.slides > section {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    width: 100vw;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
+.slides > section[color=reverse] {
+    color: var(--white);
+    z-index: 1;
+}
+
+.hero {
+    padding-top: 80px;
+    height: 100%;
+}
+
+.hero > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+
+    width: 70%;
+    height: 68vh;
+}
+
+.hero > div:nth-child(2) > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 50px;
+}
+
+.hero > div:nth-child(2) > div > h2 {
+    margin-bottom: 0;
+}
+
+.hero > div:nth-child(2) > div > h6 {
+    font-weight: 300;
+    color: var(--grey002);
+}
+
+.safety {
+    background-color: var(--grey002);
+    background-position: right !important;
+    background-position-y: 20px !important;
+    background-size: 92% !important;
+
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+
+    position: relative;
+    width: 100vw;
+}
+
+.range {
+    background-color: var(--grey002);
+    background-position: left !important;
+    background-size: 72% !important;
+
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+
+    position: relative;
+    width: 100vw;
+}
+
+.safety > div:first-child {
+    background-color: var(--white);
+    z-index: 1;
+    
+    padding: 60px 50px;
+    height: 100%;
+}
+
+.range > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+}
+
+.range > div:first-child > div {
+    color: var(--white);
+    text-align: center;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+    width: 75%;
+
+    margin-bottom: 70px;
+}
+
+.range > div:last-child {
+    background-color: var(--white);
+    z-index: 1;
+    
+    padding: 30px;
+    height: 100%;
+}
+
+.safety > div:first-child > h5, .range > div:last-child > h5 {
+    line-height: 1.7em;
+    margin-top: 20px;
+    color: var(--grey008);
+}
+
+.safety > div:first-child > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 15px 25px 25px;
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: var(--grey002);
+}
+
+.safety > div:first-child > div > div {
+    width: 100%;
+}
+
+.safety > div:first-child > button, .range > div:last-child > button {
+    position: absolute;
+    bottom: 45px;
+}
+
+.safety > div:last-child {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.range > div:last-child > div {
+    background-position: center !important;
+    background-size: 100%;
+
+    overflow: hidden;
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 100%;
+    height: 300px;
+}
+
+.performance {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    background-position: center !important;
+    background-position-y: -140px !important;
+}
+
+.awd {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    background-position: center !important;
+    background-position-y: -180px !important;
+}
+
+.interior {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    background-position: center !important;
+    background-position-y: -110px !important;
+}
+
+.specs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    background-position: left !important;
+    background-size: 45% !important;
+    background-color: #000;
+}
+
+.specs > div {
+    width: 40%;
+    margin-right: 120px;
+}
+
+.specs > div > h3 {
+    font-weight: 300;
+    color: var(--white);
+}
+
+.specs > div > h3 > strong {
+    font-weight: 600;
+}
+
+.specsTab {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+
+.specsTab > button {
+    color: var(--grey004);
+    border-width: 3px;
+    border-color: var(--grey007);
+    background-color: var(--transparent);
+}
+
+.specsTab > button:hover, .specsTab > button[status=active] {
+    color: var(--white);
+    border-color: var(--white);
+    background-color: var(--transparent);
+}
+
+.specsTab > button[variant=contained] {
+    text-transform: capitalize;
+    opacity: 0.9;
+    color: var(--black);
+    border-color: var(--white);
+    background-color: var(--white);
+}
+
+.specsTab > button[variant=contained]:hover {
+    opacity: 1;
+}
+
+.order {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-position: right !important;
+    background-size: 45% !important;
+    background-color: #000;
+}
+
+.order > div {
+    width: 30%;
+    margin-left: 240px;
+}
+
+.order > div > h3 {
+    color: var(--white);
+}
+
+.order > div > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+}
+
+.order > div > div > button {
+    opacity: 0.9;
+}
+
+.order > div > div > button:hover {
+    opacity: 1;
+}
+
+.performance > div:first-child, .awd > div:first-child {
+    color: var(--white);
+    text-align: center;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+    width: 65%;
+
+    margin-bottom: 70px;
+}
+
+.interior > div:first-child {
+    color: var(--white);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* background-color: yellowgreen; */
+
+    width: 15%;
+    height: 52%;
+    margin-right: 70px;
+    margin-bottom: 70px;
+}
+
+.interior > div:first-child > div:not(:last-child) {
+    margin-bottom: 40px;
+}
+
+.performance > div:first-child > div > h2, 
+.awd > div:first-child > div > h2, 
+.range > div:first-child > div > div > h2,
+.interior > div:first-child > div > h2 {
+    margin-bottom: 8px;
+}
+
+.performance > div:first-child > div > h6, 
+.awd > div:first-child > div > h6, 
+.range > div:first-child > div > div > h6,
+.interior > div:first-child > div > h6 {
+    font-weight: 300;
+    font-size: 0.75em;
+    line-height: 1.5em;
+    color: var(--grey001);
+    margin-top: 0;
+}
+
+.performance > div:last-child, .awd > div:last-child, .interior > div:last-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 40px;
+    width: 100vw;
+    height: 30vh;
+    background-color: var(--white);
+}
+
+.performance > div:last-child > div, 
+.awd > div:last-child > div, 
+.interior > div:last-child > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 50px;
+    width: 67%;
+}
+
+.performance > div:last-child > div > div > p, 
+.awd > div:last-child > div > div > p,
+.interior > div:last-child > div > div > p {
+    font-weight: 300;
+    font-size: 1em;
+    margin-bottom: 2px;
+}
+
+.performance > div:last-child > div > div > h3, 
+.awd > div:last-child > div > div > h3,
+.interior > div:last-child > div > div > h3 {
+    font-size: 1.7em;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.performance > div:last-child > div > div > h5, 
+.awd > div:last-child > div > div > h5,
+.interior > div:last-child > div > div > h5 {
+    color: var(--grey007);
+    font-weight: 500;
+    line-height: 1.75em;
+}

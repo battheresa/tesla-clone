@@ -101,12 +101,6 @@
     margin-right: 12px;
 }
 
-.content > span {
-    position: absolute;
-    bottom: 25px;
-    transition: 0.5s;   
-}
-
 @media screen and (max-width: 470px) {
     .content {
         padding-top: 115px;
@@ -125,11 +119,6 @@
     .content > div > button {
         width: 85%;
         align-self: center;
-    }
-
-    .content > span {
-        position: relative;
-        margin-top: 35px;
     }
 
     .cybertruck {

@@ -43,7 +43,17 @@ const home = {
     powerwall: '',
 };
 
-const other = {
+const design = {
+    ...components,
+};
+
+const model3 = {
+    ...components,
+    hello: 'Bonjour!',
+    welcome: 'Bienvenue!',
+};
+
+const dummy = {
     ...components,
     hello: 'Bonjour!',
     welcome: 'Bienvenue!',
@@ -52,5 +62,7 @@ const other = {
 // export
 export const es = {
     '/': home,
-    '/dummy': other,
+    '/design': design,
+    '/model3': model3,
+    '/dummy': dummy,
 };

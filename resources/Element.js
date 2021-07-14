@@ -60,3 +60,29 @@ export const Dropdown = ({ content, value, placeholder, searchable=true, disable
         </div>
     );
 };
+
+export const Arrow = ({ marginTop }) => {
+    const [ arrowStyle, setArrowStyle ] = useState({ transform: 'translateY(0px)' });
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setArrowStyle({ transform: 'translateY(6px)' });
+            setTimeout(() => {
+                setArrowStyle({ transform: 'translateY(0px)' });
+                setTimeout(() => {
+                    setArrowStyle({ transform: 'translateY(5px)' });
+                    setTimeout(() => {
+                        setArrowStyle({ transform: 'translateY(0px)' });
+                        setTimeout(() => {}, 1000);
+                    }, 200);
+                }, 200);
+            }, 600);
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, []);
+    
+    return (
+        <div className='arrow' style={{ ...arrowStyle, marginTop: `${marginTop}px` }}><ChevronDown width={40} height={40} /></div>
+    );
+};

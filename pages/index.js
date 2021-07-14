@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
@@ -7,12 +6,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styles from '../styles/Home.module.css';
 
+import { Arrow } from '../resources/Element';
 import { t } from '../resources/Translations';
+
 import { getImage } from './api/storage';
+import { deviceBreakpoint } from '../utilities/config';
 import { useWindowDimensions } from '../utilities/customHooks';
 import { clampOpacity } from '../utilities/customServices';
-import { deviceBreakpoint } from '../utilities/config';
-import { ChevronDown } from 'react-feather';
 
 function Home() {
     const router = useRouter();
@@ -24,40 +24,21 @@ function Home() {
     const [ contentScroll, setContentScroll ] = useState(true);
     const [ contentOpacity, setContentOpacity ] = useState(1);
     const [ buttonStyle, setButtonStyle ] = useState({ marginLeft: '60px', marginRight: '60px', opacity: '0' });
-    const [ arrowStyle, setArrowStyle ] = useState({ transform: 'translateY(0px)' });
 
     const [ content, setContent ] = useState([
         { tag: 'auto', title: 'Model S', bgImage: '' },
         { tag: 'auto', title: 'Model Y', bgImage: '' },
         { tag: 'auto', title: 'Model X', bgImage: '' },
         { tag: 'auto', title: 'Model 3', bgImage: '' },
-        { tag: router.locale === 'en-us' ? 'solarPanel' : 'Cybertruck', title: router.locale === 'en-us' ? 'Solar Panels' : 'Cybertruck', bgImage: '' },
-        { tag: router.locale === 'en-us' ? 'solarRoof' : 'Powerwall', title: router.locale === 'en-us' ? 'Solar Roof' : 'Powerwall', bgImage: '' },
+        { tag: router.locale === 'en-us' ? 'solar-panels' : 'cybertruck', title: router.locale === 'en-us' ? 'Solar Panels' : 'Cybertruck', bgImage: '' },
+        { tag: router.locale === 'en-us' ? 'solar-roof' : 'powerwall', title: router.locale === 'en-us' ? 'Solar Roof' : 'Powerwall', bgImage: '' },
         { tag: 'shop', title: 'Accessories', bgImage: '' },
     ]);
 
+    // get cybertruck logo
     useEffect(async () => {
         const logo = await getImage('cybertruck', 'text', 'png');
         setCybertruckLogo(`url(${logo})`);
-    }, []);
-
-    // arrow animation
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setArrowStyle({ transform: 'translateY(6px)' });
-            setTimeout(() => {
-                setArrowStyle({ transform: 'translateY(0px)' });
-                setTimeout(() => {
-                    setArrowStyle({ transform: 'translateY(5px)' });
-                    setTimeout(() => {
-                        setArrowStyle({ transform: 'translateY(0px)' });
-                        setTimeout(() => {}, 1000);
-                    }, 200);
-                }, 200);
-            }, 600);
-        }, 2000);
-
-        return () => clearInterval(interval);
     }, []);
 
     // button animation
@@ -69,6 +50,7 @@ function Home() {
         return () => clearInterval(interval);
     }, []);
 
+    // change background color
     useEffect(() => {
         if (width) {
             setBgColor(content[slide].tag === 'powerwall' || (content[slide].tag === 'cybertruck' && width < (deviceBreakpoint - 180)) ? 'black' : 'white');
@@ -110,6 +92,11 @@ function Home() {
             }
         }
     };
+
+    // change route
+    const changeRoute = (page, selection) => {
+        router.push(`/${page}?selection=${selection.toLowerCase().replaceAll(' ', '')}`);
+    };
     
     return (
         <div className={styles.container} style={{ height: `${height}px`, overflowY: contentScroll ? 'scroll' : 'hidden' }} onScroll={(e) => handleOnScroll(e.target.scrollTop)}>
@@ -122,7 +109,7 @@ function Home() {
             <Header mode='main' curSlide={0} bgColor={bgColor} setScrolling={setContentScroll} />
 
             <main className={styles.slides}>
-                {content.map((item, i) => (
+                {content.map(item => (
                     <section key={item.title} style={{ height: `${height}px`, backgroundImage: `url(${item.bgImage})` }} />
                 ))}
 
@@ -138,7 +125,7 @@ function Home() {
                     {(content[slide].tag === 'powerwall' || content[slide].tag === 'shop') && <h5></h5>}
                     
                     {content[slide].tag === 'auto' && <div>
-                        <button color='secondary' variant='contained' style={buttonStyle}>{t('menu.customOrder')}</button>
+                        <button color='secondary' variant='contained' onClick={() => changeRoute('design', content[slide].title)} style={buttonStyle}>{t('menu.customOrder')}</button>
                         <button color='primary' variant='contained' style={buttonStyle}>{t('menu.existingInventory')}</button>
                     </div>}
                     {content[slide].tag === 'cybertruck' && <div className={styles.cybertruckText}>
@@ -146,22 +133,22 @@ function Home() {
                         <button color='primary' variant='outlined'>{t('menu.orderNow')}</button>
                     </div>}
                     {content[slide].tag.includes('solar') && <div>
-                        <button color='secondary' variant='contained'>{t('menu.orderNow')}</button>
+                        <button color='secondary' variant='contained' onClick={() => changeRoute('custom', content[slide].title)}>{t('menu.orderNow')}</button>
                         <button color='primary' variant='contained'>{t('menu.learnMore')}</button>
                     </div>}
                     {content[slide].tag === 'powerwall' && <div>
-                        <button color='secondary' variant='contained'>{t('menu.orderNow')}</button>
+                        <button color='secondary' variant='contained' onClick={() => changeRoute('custom', content[slide].title)}>{t('menu.orderNow')}</button>
                         <button color='primary' variant='contained'>{t('menu.learnMore')}</button>
                     </div>}
                     {content[slide].tag === 'shop' && <div layout='single'>
                         <button color='secondary' variant='contained'>{t('menu.shopNow')}</button>
                     </div>}
 
-                    {slide === 0 && <span style={arrowStyle}><ChevronDown width={40} height={40} /></span>}
+                    {slide === 0 && <Arrow />}
                 </div>
             </main>
             
-            <Footer open={slide === content.length - 1} />
+            <Footer open={slide === content.length - 1} bgColor={content[content.length - 1].bgColor} />
         </div>
     );
 }

@@ -43,7 +43,17 @@ const home = {
     powerwall: '',
 };
 
-const other = {
+const design = {
+    ...components,
+};
+
+const model3 = {
+    ...components,
+    hello: 'Hello!',
+    welcome: 'Welcome!',
+};
+
+const dummy = {
     ...components,
     hello: 'Hello!',
     welcome: 'Welcome!',
@@ -52,5 +62,7 @@ const other = {
 // export
 export const enus = {
     '/': home,
-    '/dummy': other,
+    '/design': design,
+    '/model3': model3,
+    '/dummy': dummy,
 };

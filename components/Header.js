@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import LogoBlack from '../public/logo-black.png';
 import LogoWhite from '../public/logo-white.png';
 
 import Sidebar from './Sidebar';
+import styles from '../styles/components/Header.module.css';
 
-import { t } from '../resources/Translations';  // cause error
+import { t } from '../resources/Translations';
 import { deviceBreakpoint } from '../utilities/config';
 import { useWindowDimensions } from '../utilities/customHooks';
-import styles from '../styles/components/Header.module.css';
 
 function Header({ mode, curSlide, bgColor, setScrolling }) {
     const router = useRouter();
@@ -29,7 +29,7 @@ function Header({ mode, curSlide, bgColor, setScrolling }) {
     const handleOpenSidebar = (value) => {
         setOpenSidebar(value);
         setScrolling(!value);
-    }
+    };
 
     // on mouse enter button
     const handleOnMouseEnter = (event) => {
@@ -51,11 +51,11 @@ function Header({ mode, curSlide, bgColor, setScrolling }) {
         <div>
             <header className={styles.container} onMouseLeave={(e) => setBackdropStyle({ ...backdropStyle, opacity: 0 })}>
                 <div className={styles.backdrop} style={backdropStyle} color={bgColor === 'white' ? 'original' : 'reverse'} />
-                <div className={styles.logo} onClick={() => router.push('/', '/', { locale: router.locale })}>
+                <div className={styles.logo} onClick={() => router.push('/')}>
                     <Image src={bgColor === 'white' ? LogoBlack : LogoWhite} alt='tesla-logo' />
                 </div>
                 {!hideMenu && width > deviceBreakpoint && <nav color={bgColor === 'white' ? 'original' : 'reverse'}>
-                    <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model 3</button>
+                    <button onClick={() => router.push('/model3')} onMouseEnter={(e) => handleOnMouseEnter(e)}>Model 3</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model S</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model X</button>
                     <button onMouseEnter={(e) => handleOnMouseEnter(e)}>Model Y</button>
