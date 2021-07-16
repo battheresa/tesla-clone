@@ -22,14 +22,10 @@
     scroll-snap-stop: normal;
 }
 
-.slides > section[color=reverse] {
-    color: var(--white);
-    z-index: 1;
-}
-
 .hero {
-    padding-top: 80px;
+    color: var(--white);
     height: 100%;
+    padding-top: 80px;
 }
 
 .hero > div:nth-child(2) {
@@ -199,6 +195,26 @@
     background-position-y: -110px !important;
 }
 
+.autopilot {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    position: relative;
+}
+
+.autopilot > video {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+
+    width: 100vw;
+    height: 70vh;
+
+    object-fit: cover;
+    object-position: center -130px;
+}
+
 .specs {
     display: flex;
     flex-direction: column;
@@ -309,7 +325,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    /* background-color: yellowgreen; */
 
     width: 15%;
     height: 52%;
@@ -317,14 +332,35 @@
     margin-bottom: 70px;
 }
 
-.interior > div:first-child > div:not(:last-child) {
+.autopilot > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 15%;
+    height: 52%;
+    margin-left: 150px;
+    margin-bottom: 70px;
+}
+
+.autopilot > div:first-child > div > h6 {
+    font-weight: 300;
+    font-size: 0.75em;
+    line-height: 1.5em;
+    margin-top: 0;
+}
+
+.interior > div:first-child > div:not(:last-child), 
+.autopilot > div:first-child > div:not(:last-child) {
     margin-bottom: 40px;
 }
 
 .performance > div:first-child > div > h2, 
 .awd > div:first-child > div > h2, 
 .range > div:first-child > div > div > h2,
-.interior > div:first-child > div > h2 {
+.interior > div:first-child > div > h2,
+.autopilot > div:first-child > div > h2 {
     margin-bottom: 8px;
 }
 
@@ -339,7 +375,10 @@
     margin-top: 0;
 }
 
-.performance > div:last-child, .awd > div:last-child, .interior > div:last-child {
+.performance > div:last-child, 
+.awd > div:last-child, 
+.interior > div:last-child, 
+.autopilot > div:last-child {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -353,7 +392,8 @@
 
 .performance > div:last-child > div, 
 .awd > div:last-child > div, 
-.interior > div:last-child > div {
+.interior > div:last-child > div,
+.autopilot > div:last-child > div {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 50px;
@@ -362,7 +402,8 @@
 
 .performance > div:last-child > div > div > p, 
 .awd > div:last-child > div > div > p,
-.interior > div:last-child > div > div > p {
+.interior > div:last-child > div > div > p
+.autopilot > div:last-child > div > div > p {
     font-weight: 300;
     font-size: 1em;
     margin-bottom: 2px;
@@ -370,7 +411,8 @@
 
 .performance > div:last-child > div > div > h3, 
 .awd > div:last-child > div > div > h3,
-.interior > div:last-child > div > div > h3 {
+.interior > div:last-child > div > div > h3,
+.autopilot > div:last-child > div > div > h3 {
     font-size: 1.7em;
     font-weight: 500;
     margin-top: 0;
@@ -379,7 +421,8 @@
 
 .performance > div:last-child > div > div > h5, 
 .awd > div:last-child > div > div > h5,
-.interior > div:last-child > div > div > h5 {
+.interior > div:last-child > div > div > h5,
+.autopilot > div:last-child > div > div > h5 {
     color: var(--grey007);
     font-weight: 500;
     line-height: 1.75em;

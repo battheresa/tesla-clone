@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
@@ -25,7 +24,7 @@ function Model3() {
     const [ contentScroll, setContentScroll ] = useState(true);
     
     const [ allImages, setAllImages ] = useState([]);
-    const [ autopilotVideo, setAutopilotVideo ] = useState('');
+    const [ autopilotVideo, setAutopilotVideo ] = useState();
     const [ content, setContent ] = useState([
         { tag: 'hero', bgColor: 'black', bgImage: '' },
         { tag: 'safety', bgColor: 'white', bgImage: '' },
@@ -88,7 +87,7 @@ function Model3() {
             <Header mode='other' curSlide={slide} bgColor={content[slide].bgColor} setScrolling={setContentScroll} />
 
             <main className={styles.slides}>
-                <section className={styles.hero} style={{ height: `${height}px`, backgroundImage: `url(${content[0].bgImage})` }} color='reverse'>
+                <section className={styles.hero} style={{ height: `${height}px`, backgroundImage: `url(${content[0].bgImage})` }}>
                     <h1>Model 3</h1>
                     <div>
                         <div>
@@ -227,7 +226,35 @@ function Model3() {
                     </div>
                 </section>
                 <section className={styles.autopilot} style={{ height: `${height}px`, backgroundImage: `url(${content[5].bgImage})` }}>
-                    
+                    <div>
+                        <div>
+                            <h2>15inch</h2>
+                            <h6>A touchscreen display designed to improve over time</h6>
+                        </div>
+                        <div>
+                            <h2>wifi icon</h2>
+                            <h6>Over-the-air software updates introduce new features, functionality, and performance</h6>
+                        </div>
+                        <div>
+                            <h2>car icon</h2>
+                            <h6>An expensive Glass Roof provides more headroom and UV protection</h6>
+                        </div>
+                    </div>
+                    {autopilotVideo && <video src={autopilotVideo} controls autoPlay loop muted />}
+                    <div>
+                        <div>
+                            <div>
+                                <p>Autopilot</p>
+                                <h3>Future of Driving</h3>
+                                <button color='secondary' variant='outlined'>{t('menu.orderNow')}</button>
+                            </div>
+                            <div>
+                                <h5>Autopilot's advanced safety and convenience features are designed to assist you with the most burdensome
+                                    parts of driving.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
                 </section>
                 <section className={styles.interior} style={{ height: `${height}px`, backgroundImage: `url(${content[6].bgImage})` }}>
                     <div>
