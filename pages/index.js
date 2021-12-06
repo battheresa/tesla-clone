@@ -144,7 +144,7 @@ function Home() {
                         <button color='secondary' variant='contained'>{t('menu.shopNow')}</button>
                     </div>}
 
-                    {slide === 0 && <Arrow />}
+                    <div name='arrow'>{slide === 0 && <Arrow />}</div>
                 </div>
             </main>
             

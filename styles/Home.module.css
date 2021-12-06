@@ -101,21 +101,31 @@
     margin-right: 12px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-height: 720px) {
+    .content > div {
+        height: 56vh;
+    }
+}
+
+@media screen and (max-width: 620px) {
     .content {
         padding-top: 115px;
     }
     
-    .content > div {
+    .content > div { 
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
 
         width: 100vw;
-        height: 52vh;
+        height: 58vh;
     }
-    
+
+    .content > div[name=arrow] {
+        height: fit-content;
+    }
+
     .content > div > button {
         width: 85%;
         align-self: center;
@@ -142,5 +152,16 @@
 
     .cybertruckText > button {
         margin-top: 32px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .content > div {
+        height: 55vh;
+    }
+
+    .content > div[name=arrow] {
+        height: fit-content;
+        margin-top: -20px;
     }
 }
