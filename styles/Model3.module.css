@@ -44,7 +44,7 @@
     justify-content: center;
     align-items: center;
 
-    margin-right: 50px;
+    margin-right: 60px;
 }
 
 .hero > div:nth-child(2) > div > h2 {
@@ -125,7 +125,7 @@
     color: var(--grey008);
 }
 
-.safety > div:first-child > div {
+.safety > div:first-child > div:not(:last-child) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,7 +143,7 @@
     width: 100%;
 }
 
-.safety > div:first-child > button, .range > div:last-child > button {
+.safety > div:first-child > div:last-child, .range > div:last-child > div:last-child {
     position: absolute;
     bottom: 45px;
 }
@@ -154,7 +154,7 @@
     height: 100%;
 }
 
-.range > div:last-child > div {
+.range > div:last-child > div:not(:last-child) {
     background-position: center !important;
     background-size: 100%;
 
@@ -220,23 +220,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-
-    background-position: left !important;
-    background-size: 45% !important;
     background-color: #000;
 }
 
-.specs > div {
-    width: 40%;
-    margin-right: 120px;
+.specs > img {
+    position: absolute;
+    left: -15px;
+    width: 48%;
 }
 
-.specs > div > h3 {
+.specs > div {
+    width: 34%;
+    height: 90%;
+    margin-right: 160px;
+}
+
+.specs > div > h2 {
     font-weight: 300;
     color: var(--white);
 }
 
-.specs > div > h3 > strong {
+.specs > div > h2 > strong {
     font-weight: 600;
 }
 
@@ -244,10 +248,11 @@
     margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 10px;
+    column-gap: 8px;
 }
 
 .specsTab > button {
+    padding: 5px 10px;
     color: var(--grey004);
     border-width: 3px;
     border-color: var(--grey007);
@@ -277,25 +282,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-
-    background-position: right !important;
-    background-size: 45% !important;
     background-color: #000;
 }
 
-.order > div {
-    width: 30%;
-    margin-left: 240px;
+.order > img {
+    position: absolute;
+    right: 20px;
+    width: 45%;
 }
 
-.order > div > h3 {
+.order > div{
+    width: 33%;
+    margin-left: 170px;
+}
+
+.order > div > h2 {
     color: var(--white);
 }
 
 .order > div > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 15px;
+    grid-gap: 25px;
+
+    margin-top: 40px;
 }
 
 .order > div > div > button {
@@ -392,12 +402,18 @@
 
 .performance > div:last-child > div, 
 .awd > div:last-child > div, 
-.interior > div:last-child > div,
 .autopilot > div:last-child > div {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 50px;
-    width: 67%;
+    width: 68%;
+}
+
+.interior > div:last-child > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 50px;
+    width: 70%;
 }
 
 .performance > div:last-child > div > div > p, 

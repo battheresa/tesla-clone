@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    position: relative;
+    margin-top: 20px;
+}
+
+.column {
+    position: absolute;    
+    width: 50%;
+}
+
+.column > div {
+    padding: 6px 0 14px 0;
+    position: relative;
+}
+
+.column > div::after {
+    content: '';
+    background-color: var(--grey005);
+    height: 1px;
+    width: 30px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.column > div > p {
+    color: var(--grey003);
+    font-size: 0.85em;
+    line-height: 1.5em;
+}
+
+.column > div > p:first-child {
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: -3px;
+}

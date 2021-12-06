@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import StarRating from '../components/subcomponents/StarRating';
 import ImageLabel from '../components/subcomponents/ImageLabel';
+import SpecsInfo from '../components/subcomponents/SpecsInfo';
 import styles from '../styles/Model3.module.css';
 
 import { Arrow } from '../resources/Element';
@@ -37,13 +38,15 @@ function Model3() {
         { tag: 'order', bgColor: 'black', bgImage: '' },
     ]);
 
-    // load media files
+    // load images files
     useEffect(async () => {
         const images = await getAllImage('model-3');
         setAllImages(images);
+    }, []);
 
+    // load video files
+    useEffect(async () => {
         const video = await getVideo('autopilot', 'mp4');
-        console.log(video);
         setAutopilotVideo(video);
     }, []);
 
@@ -62,7 +65,7 @@ function Model3() {
     }, [width, allImages]);
 
     // update current slide
-    const handleOnScroll = (offset) => {  
+    const handleOnScroll = (offset) => {
         const benchmark = height / 2;
         setSlide(0);
 
@@ -74,6 +77,14 @@ function Model3() {
                 break;
             }
         }
+    };
+
+    // fade in animation
+    const fadeInAnimation = (index, from, to, delay) => {
+        if (slide === index) 
+            return { transform: `translateY(${to}px)`, opacity: '1', transition: '0.5s', transitionDelay: `${delay}s` };
+        
+        return { transform: `translateY(${from}px)`, opacity: '0', transition: '0.5s', transitionDelay: `${delay}s` };
     };
 
     return (
@@ -88,34 +99,36 @@ function Model3() {
 
             <main className={styles.slides}>
                 <section className={styles.hero} style={{ height: `${height}px`, backgroundImage: `url(${content[0].bgImage})` }}>
-                    <h1>Model 3</h1>
+                    <h1 style={fadeInAnimation(0, 20, 0, 0.4)}>Model 3</h1>
                     <div>
-                        <div>
+                        <div style={fadeInAnimation(0, 20, 0, 0.4)}>
                             <h2>3.1 s</h2>
                             <h6>0-60 mph*</h6>
                         </div>
-                        <div>
-                            <h2>353 mi</h2>
+                        <div style={fadeInAnimation(0, 20, 0, 0.6)}>
+                            <h2>358 mi</h2>
                             <h6>Range (EPA est.)</h6>
                         </div>
-                        <div>
+                        <div style={fadeInAnimation(0, 20, 0, 0.8)}>
                             <h2>AWD</h2>
                             <h6>Dual Motor</h6>
                         </div>
-                        <button color='primary' variant='outlined'>{t('menu.orderNow')}</button>
+                        <div style={fadeInAnimation(0, 20, -5, 1)}>
+                            <button color='primary' variant='outlined'>{t('menu.orderNow')}</button>
+                        </div>
                     </div>
                     <Arrow marginTop={15} />
                 </section>
                 <section className={styles.safety} style={{ height: `${height}px`, backgroundImage: `url(${content[1].bgImage})` }}>
                     <div>
-                        <p>Safety</p>
-                        <h3>Bulit for Safety</h3>
-                        <h5>
+                        <p style={fadeInAnimation(1, 20, 0, 0.4)}>Safety</p>
+                        <h3 style={fadeInAnimation(1, 20, 0, 0.4)}>Bulit for Safety</h3>
+                        <h5 style={fadeInAnimation(1, 20, 0, 0.4)}>
                             Safety is the most important part of the overall Model 3 design. The metal structure is a combination of 
                             aluminum and steel, for maximum strength in every area. In a roof-crush test, Model 3 resisted four times 
                             its own mass, even with an all-glass roof: that's the same weight as two full-grown African elephants.
                         </h5>
-                        <div>
+                        <div style={fadeInAnimation(1, 20, 0, 0.6)}>
                             <h4>5-Star Overall NHTSA Rating</h4>
                             <div>
                                 <StarRating title='Driver' description='Frontal' rating={5} />
@@ -125,31 +138,33 @@ function Model3() {
                                 <StarRating title='Rollover' description='' rating={5} />
                             </div>
                         </div>
-                        <button color='secondary' variant='outlined'>{t('menu.orderNow')}</button>
+                        <div style={fadeInAnimation(1, 20, 0, 0.8)}>
+                            <button color='secondary' variant='outlined'>{t('menu.orderNow')}</button>
+                        </div>
                     </div>
                     <div>
-                        <ImageLabel text='Impact Protection' direction='bottom' length={250} positionX={200} positionY={160} />
-                        <ImageLabel text='Rigid Structure' direction='bottom' length={120} positionX={490} positionY={95} />
-                        <ImageLabel text='Very Low Rollover Risk' direction='top' length={180} positionX={540} positionY={470} />
+                        <ImageLabel display={slide === 1} text='Impact Protection' direction='bottom' length={250} positionX={200} positionY={160} />
+                        <ImageLabel display={slide === 1} text='Rigid Structure' direction='bottom' length={120} positionX={490} positionY={95} />
+                        <ImageLabel display={slide === 1} text='Very Low Rollover Risk' direction='top' length={180} positionX={540} positionY={470} />
                     </div>
                 </section>
                 <section className={styles.performance} style={{ height: `${height}px`, backgroundImage: `url(${content[2].bgImage})` }}>
                     <div>
-                        <div>
+                        <div style={fadeInAnimation(2, 20, 0, 0.4)}>
                             <h2>3.1s</h2>
                             <h6>Quickest acceleration—from zero to 60 mph* in as little as 3.1 seconds</h6>
                         </div>
-                        <div>
+                        <div style={fadeInAnimation(2, 20, 0, 0.6)}>
                             <h2>162mph</h2>
                             <h6>Improved handling and aerodynamics allow for a top speed of 162 mph</h6>
                         </div>
-                        <div>
+                        <div style={fadeInAnimation(2, 20, 0, 0.8)}>
                             <h2>AWD</h2>
                             <h6>Dual Motor All-Wheel Drive instantly controls traction and torque, in all weather conditions</h6>
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div style={fadeInAnimation(2, 20, 0, 0.4)}>
                             <div>
                                 <p>Performance</p>
                                 <h3>Quickest Acceleration</h3>
@@ -166,21 +181,21 @@ function Model3() {
                 </section>
                 <section className={styles.awd} style={{ height: `${height}px`, backgroundImage: `url(${content[3].bgImage})` }}>
                     <div>
-                        <div>
+                        <div style={fadeInAnimation(3, 20, 0, 0.4)}>
                             <h2>2</h2>
                             <h6>Independent motors digitally control torque to the front and rear wheels</h6>
                         </div>
-                        <div>
+                        <div style={fadeInAnimation(3, 20, 0, 0.6)}>
                             <h2>10ms</h2>
                             <h6>Dual motors respond to changing conditions in as little as 10 milliseconds</h6>
                         </div>
-                        <div>
+                        <div style={fadeInAnimation(3, 20, 0, 0.8)}>
                             <h2>icon</h2>
                             <h6>Unparalleled traction and control, in all weather conditions</h6>
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div style={fadeInAnimation(3, 20, 0, 0.4)}>
                             <div>
                                 <p>All-Wheel Drive</p>
                                 <h3>Dual Motor</h3>
@@ -198,31 +213,33 @@ function Model3() {
                 <section className={styles.range} style={{ height: `${height}px`, backgroundImage: `url(${content[4].bgImage})` }}>
                     <div>
                         <div>
-                            <div>
+                            <div style={fadeInAnimation(4, 20, 0, 0.4)}>
                                 <h2>353mi</h2>
                                 <h6>Go anywhere with up to 353 mi of estimated range on a single charge</h6>
                             </div>
-                            <div>
+                            <div style={fadeInAnimation(4, 20, 0, 0.6)}>
                                 <h2>15min</h2>
                                 <h6>Recharge up to 175 mi in 15 minutes at Supercharger locations</h6>
                             </div>
-                            <div>
+                            <div style={fadeInAnimation(4, 20, 0, 0.8)}>
                                 <h2>25,000+</h2>
                                 <h6>Superchargers placed along well-traveled routes around the world</h6>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <p>Range</p>
-                        <h3>Go Anywhere</h3>
-                        <h5>
+                        <p style={fadeInAnimation(4, 20, 0, 0.4)}>Range</p>
+                        <h3 style={fadeInAnimation(4, 20, 0, 0.4)}>Go Anywhere</h3>
+                        <h5 style={fadeInAnimation(4, 20, 0, 0.4)}>
                             Model 3 is fully electric, so you never need to visit a gas station again. If you charge overnight at home, 
                             you can wake up to a full battery every morning. And when you’re on the road, it’s easy to plug in along the 
                             way—at any public station or with the Tesla charging network. We currently have over 25,000 Superchargers worldwide, 
                             with six new locations opening every week.
                         </h5>
-                        <div style={{ backgroundImage: `url(${allImages.find(item => item.includes('range-map'))})` }} />
-                        <button color='secondary' variant='outlined'>{t('menu.orderNow')}</button>
+                        <div style={{ ...fadeInAnimation(4, 20, 0, 0.6), backgroundImage: `url(${allImages.find(item => item.includes('range-map'))})` }} />
+                        <div style={fadeInAnimation(4, 20, 0, 0.8)}>
+                            <button color='secondary' variant='outlined'>{t('menu.orderNow')}</button>
+                        </div>
                     </div>
                 </section>
                 <section className={styles.autopilot} style={{ height: `${height}px`, backgroundImage: `url(${content[5].bgImage})` }}>
@@ -258,21 +275,21 @@ function Model3() {
                 </section>
                 <section className={styles.interior} style={{ height: `${height}px`, backgroundImage: `url(${content[6].bgImage})` }}>
                     <div>
-                        <div>
+                        <div style={fadeInAnimation(6, 20, 0, 0.4)}>
                             <h2>15inch</h2>
                             <h6>A touchscreen display designed to improve over time</h6>
                         </div>
-                        <div>
+                        <div style={fadeInAnimation(6, 20, 0, 0.6)}>
                             <h2>wifi icon</h2>
                             <h6>Over-the-air software updates introduce new features, functionality, and performance</h6>
                         </div>
-                        <div>
+                        <div style={fadeInAnimation(6, 20, 0, 0.8)}>
                             <h2>car icon</h2>
                             <h6>An expensive Glass Roof provides more headroom and UV protection</h6>
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div style={fadeInAnimation(6, 20, 0, 0.4)}>
                             <div>
                                 <p>Interior</p>
                                 <h3>Built Around the Driver</h3>
@@ -287,25 +304,30 @@ function Model3() {
                         </div>
                     </div>
                 </section>
-                <section className={styles.specs} style={{ height: `${height}px`, backgroundImage: `url(${content[7].bgImage})` }}>
-                    <div>
-                        <h3><strong>Model 3</strong> Specs</h3>
+                <section className={styles.specs} style={{ height: `${height}px` }}>
+                    <div style={fadeInAnimation(7, 50, 0, 0.6)}>
+                        <h2><strong>Model 3</strong> Specs</h2>
                         <div className={styles.specsTab}>
                             <button onClick={() => setSpecsTab(0)} status={specsTab === 0 ? 'active' : ''}>{t('menu.orderNow')}</button>
                             <button onClick={() => setSpecsTab(1)} status={specsTab === 1 ? 'active' : ''}>{t('menu.orderNow')}</button>
                             <button onClick={() => setSpecsTab(2)} status={specsTab === 2 ? 'active' : ''}>{t('menu.orderNow')}</button>
                             <button variant='contained'>{t('menu.orderNow')}</button>
                         </div>
+                        <SpecsInfo open={specsTab === 0} menu='performance' />
+                        <SpecsInfo open={specsTab === 1} menu='awd' />
+                        <SpecsInfo open={specsTab === 2} menu='rwd' />
                     </div>
+                    <img style={fadeInAnimation(7, 50, 20, 0.4)} src={content[7].bgImage} alt='' />
                 </section>
-                <section className={styles.order} style={{ height: `${height}px`, backgroundImage: `url(${content[8].bgImage})` }}>
+                <section className={styles.order} style={{ height: `${height}px` }}>
                     <div>
-                        <h3>Experience Model 3</h3>
-                        <div>
+                        <h2 style={fadeInAnimation(8, 50, 0, 0.6)}>Experience Model 3</h2>
+                        <div style={fadeInAnimation(8, 50, 0, 0.7)}>
                             <button color='primary' variant='contained'>{t('menu.orderNow')}</button>
                             <button color='primary' variant='outlined'>{t('menu.orderNow')}</button>
                         </div>
                     </div>
+                    <img style={fadeInAnimation(8, 50, 0, 0.4)} src={content[8].bgImage} alt='' />
                 </section>
             </main>
 

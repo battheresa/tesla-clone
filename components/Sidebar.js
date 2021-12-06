@@ -5,6 +5,7 @@ import { ChevronLeft, X, Globe } from 'react-feather';
 import LanguageButton from './subcomponents/LanguageButton';
 
 import { t, currentLocale, allLocales } from '../resources/Translations';
+import { deviceBreakpoint } from '../utilities/config';
 import { useWindowDimensions } from '../utilities/customHooks';
 import styles from '../styles/components/Sidebar.module.css';
 
@@ -49,6 +50,10 @@ function Sidebar({ open, setOpen }) {
                         <button>{t('menu.existingInventory')}</button>
                         <button>{t('menu.usedInventory')}</button>
                         <button>Powerwall</button>
+                        {width < deviceBreakpoint && <button>Model 3</button>}
+                        {width < deviceBreakpoint && <button>Model S</button>}
+                        {width < deviceBreakpoint && <button>Model X</button>}
+                        {width < deviceBreakpoint && <button>Model Y</button>}
                         <button>Cybertruck</button>
                         <button>Roadster</button>
                         <button>Semi</button>

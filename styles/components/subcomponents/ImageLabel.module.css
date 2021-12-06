@@ -2,12 +2,29 @@
     position: absolute;
     padding-left: 10px;
     border-left: 3px solid var(--black);
+    transition: 0.5s;
+    transition-delay: 0.5s;
+    transform: scale(1);
+    transform-origin: left center;
+}
+
+.container[display=close] {
+    transform: scale(0);
 }
 
 .container > h6 {
-    position: relative;
-    top: -15px;
     color: var(--black);
+
+    position: relative;
+    top: -12px;
+    
+    visibility: visible;
+    transition: 0.5s;
+    transition-delay: 0.8s;
+}
+
+.container[display=close] > h6 {
+    visibility: hidden;
 }
 
 .container > div {
@@ -20,4 +37,3 @@
     border: 2px solid var(--black);
     background-color: var(--white);
 }
-
